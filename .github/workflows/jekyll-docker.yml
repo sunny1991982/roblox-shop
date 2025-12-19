@@ -1,0 +1,21 @@
+name: Deploy static content to Pages
+
+on:
+  push:
+    branches: ["main"]   # รันทุกครั้งที่ push ไป branch main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: .   # โฟลเดอร์ที่มี index.html และไฟล์เว็บทั้งหมด
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
